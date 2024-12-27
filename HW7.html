@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>HW5</title>
+	<link rel="stylesheet" type="text/css" href="HW5.css">
+</head>
+<body>
+  <div class="main-container">
+    <div class="left-panel">
+      <div class="photo-panel">
+        <img src="xiao.jpg" height="575"alt="xiao's picture">
+      </div>
+      <div class="text-content">
+
+         <h1 id="profile-name">DAVID TAO</h1>
+        <button id="edit-name-btn">Edit</button>
+
+        <h2>ABOUT ME</h2>
+        <p>I am a freshman in the Department of Management Information Systems at NCCU. 
+          I love programming and am interested in studying web development, including HTML, CSS, JavaScript, and Python</p>
+        <h2>CONTACT</h2>
+        <p>Email: 113306033@g.nccu.edu.tw</p>
+        <div class="nccu-icon">
+          <img src="R.png" alt="NCCU Icon">
+        </div>
+      </div>
+    </div>
+   
+    <div class="right-panel">
+      <!-- Education Section -->
+      <section class="education">
+        <h2>Education</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <span class="year">2024-now</span>
+            <p>National Chengchi University, Department of MIS</p>
+          </div>
+          <div class="timeline-item">
+            <span class="year">2022-2024</span>
+            <p>Taipei Songshan senior high school </p>
+          </div>
+          <div class="timeline-item">
+            <span class="year">2021</span>
+            <p>Middle School Graduation </p>
+          </div>
+        </div>
+      </section>
+
+      
+      <section class="homework">
+        <h2>Homework List</h2>
+        <ul>
+          <li><a href="https://github.com/patrickstar1234567/HM1.git">HW1</a></li>
+          <li><a href="https://github.com/patrickstar1234567/HW2.git">HW2</a></li>
+          <li><a href="https://github.com/patrickstar1234567/HW3.git">HW3</a></li>
+          <li><a href="https://github.com/patrickstar1234567/HW4.git">HW4</a></li>
+        </ul>
+      </section>
+
+     
+      <section class="favorite-music">
+        <h2>Favorite Music</h2>
+        <div class="music-list" id="music-list">
+          <a href="https://www.youtube.com/watch?v=LKZyp2cSAy4"><img src="spotify.jpg" alt="2soon"></a>
+          <a href="https://www.youtube.com/watch?v=rY0WxgSXdEE"><img src="spotify.jpg" alt="Another One Bites the Dust"></a>
+          <a href="https://www.youtube.com/watch?v=siwpn14IE7E"><img src="spotify.jpg" alt="Danger Zone"></a>
+        </div>
+        <p class="note">These are my favorite songs that inspire and relax me after a busy day.</p>
+        <button id="add-music-btn">Add</button>
+        <div id="music-form-container"></div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("add-music-btn").addEventListener("click", function() {
+      const formContainer = document.getElementById("music-form-container");
+
+      // 清空表單容器，防止重複生成
+      formContainer.innerHTML = `
+        <form id="music-form">
+          <label for="music-link">Music Link:</label>
+          <input type="url" id="music-link" placeholder="Enter music URL" required><br>
+          <label for="music-name">Music Name:</label>
+          <input type="text" id="music-name" placeholder="Enter music name" required><br>
+          <button type="submit">Submit</button>
+          <button type="button" id="cancel-btn">Cancel</button>
+        </form>
+        <p id="error-message" style="color: red; display: none;">Please fill in all fields.</p>
+      `;
+
+      // 表單提交邏輯
+      const form = document.getElementById("music-form");
+      form.addEventListener("submit", function(event) {
+        event.preventDefault(); // 防止頁面刷新
+
+        const musicLink = document.getElementById("music-link").value;
+        const musicName = document.getElementById("music-name").value;
+        const errorMessage = document.getElementById("error-message");
+
+        if (musicLink && musicName) {
+          // 創建新的音樂項目
+          const musicList = document.getElementById("music-list");
+          const newMusicItem = document.createElement("a");
+          newMusicItem.href = musicLink;
+          newMusicItem.target = "_blank";
+          newMusicItem.innerHTML = `
+            <img src="spotify.jpg" alt="${musicName}">
+            <p>${musicName}</p>
+          `;
+
+          musicList.appendChild(newMusicItem);
+
+          // 清除表單
+          formContainer.innerHTML = "";
+        } else {
+          // 顯示錯誤訊息
+          errorMessage.style.display = "block";
+        }
+      });
+
+      // 取消按鈕邏輯
+      document.getElementById("cancel-btn").addEventListener("click", function() {
+        formContainer.innerHTML = ""; // 移除表單
+      });
+    });
+
+     const editButton = document.getElementById("edit-name-btn");
+    const profileName = document.getElementById("profile-name");
+
+    editButton.addEventListener("click", function () {
+      if (editButton.textContent === "Edit") {
+        // 切换到编辑模式
+        const currentName = profileName.textContent;
+        profileName.innerHTML = `<input type="text" id="name-input" value="${currentName}">`;
+        editButton.textContent = "Save";
+      } else {
+        // 保存新名称并切换回显示模式
+        const nameInput = document.getElementById("name-input");
+        profileName.textContent = nameInput.value.trim() || "DAVID TAO"; // 如果为空，恢复默认值
+        editButton.textContent = "Edit";
+      }
+    });
+
+
+  </script>
+</body>
+</html>
+</body>
+</html>
+
+
+</body>
+</html>
